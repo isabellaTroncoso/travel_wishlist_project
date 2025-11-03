@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Wishlist</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link th:href="@{/style.css}" rel="stylesheet">
+
+</head>
+<body>
+
+<h1>🌍 Travel Wishlist</h1>
+
+<form action="/add" method="post">
+    <input type="text" id="searchInput" placeholder="Search place">
+    <input type="text" name="destination" placeholder="Destination" required>
+    <input type="text" name="description" placeholder="Description" required>
+    <input type="date" name="date" required>
+    <button type="submit">Add</button>
+</form>
+
+<!-- 🗺️ Map -->
+<div id="map" style="height:400px;"></div>
+
+<h2>💖 Saved Destinations</h2>
+<ul>
+    <th:block th:each="d : ${destinations}">
+        <li>
+            <b th:text="${d.destination}"></b> -
+            <span th:text="${d.description}"></span> |
+            <span th:text="${d.date}"></span>
+            <form th:action="@{'/delete/' + ${d.id}}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </th:block>
+</ul>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script th:src="@{/script.js}"></script>
+
+
+</body>
+</html>
