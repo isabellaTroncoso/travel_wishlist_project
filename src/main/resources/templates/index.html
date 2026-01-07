@@ -1,44 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Travel Wishlist</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link th:href="@{/style.css}" rel="stylesheet">
-
 </head>
 <body>
 
-<h1>🌍 Travel Wishlist</h1>
+<header>
+    <h1>🌍 Travel Wishlist</h1>
+</header>
 
-<form action="/add" method="post">
-    <input type="text" id="searchInput" placeholder="Search place">
-    <input type="text" name="destination" placeholder="Destination" required>
-    <input type="text" name="description" placeholder="Description" required>
-    <input type="date" name="date" required>
-    <button type="submit">Add</button>
-</form>
+<main>
 
-<!-- 🗺️ Map -->
-<div id="map" style="height:400px;"></div>
+    <section id="add-place">
+        <form th:action="@{/add}" method="post" id="addForm">
+            <input type="text" id="searchInput" placeholder="Search place">
 
-<h2>💖 Saved Destinations</h2>
-<ul>
-    <th:block th:each="d : ${destinations}">
-        <li>
-            <b th:text="${d.destination}"></b> -
-            <span th:text="${d.description}"></span> |
-            <span th:text="${d.date}"></span>
-            <form th:action="@{'/delete/' + ${d.id}}" method="post" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    </th:block>
-</ul>
+            <input type="text"
+                   name="destination"
+                   id="destinationInput"
+                   placeholder="Destination"
+                   required>
+
+            <input type="text"
+                   name="description"
+                   placeholder="Description"
+                   required>
+
+            <input type="date"
+                   name="date"
+                   required>
+
+            <button type="submit">Add</button>
+        </form>
+    </section>
+
+    <section id="map-section">
+        <div id="map"></div>
+    </section>
+
+    <section id="places">
+        <h2>Planned Trips</h2>
+
+        <ul>
+            <th:block th:each="d : ${destinations}">
+                <li>
+                    <div class="place-info">
+                        <b th:text="${d.destination}"></b>
+                        <span th:text="${d.description}"></span>
+                        <span th:text="${d.date}"></span>
+                    </div>
+
+                    <div class="actions">
+                        <!-- EDIT -->
+                        <a th:href="@{'/edit/' + ${d.id}}">
+                            <button type="button">Edit</button>
+                        </a>
+
+                        <!-- DELETE -->
+                        <form th:action="@{'/delete/' + ${d.id}}"
+                              method="post"
+                              style="display:inline;">
+                            <button type="submit" class="delete-btn">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+    </section>
+
+</main>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script th:src="@{/script.js}"></script>
-
 
 </body>
 </html>

@@ -21,15 +21,29 @@ TravelWishlist is a simple web app that helps users plan and track their future 
 
 
 2. Open `index.html` in a browser, or run a live server extension for live reload.
+3. Make sure PostgreSQL is running and update application.properties with your database credentials:
+
+spring.datasource.url=jdbc:postgresql://localhost:5050/travel_wishlist
+spring.datasource.username=postgres
+spring.datasource.password=12345
+
+
+4. Run the Spring Boot application (TravelWishlistApplication.java).
+
+Open the app in a browser: http://localhost:8080/.
 
 (Optional) Use Live Server in VS Code or IntelliJ Live Edit plugin for automatic updates when saving files.
+
 
 ## Usage
 
 1. Enter a destination, description, and date in the input fields.
-2. Click **Add** to add the trip. It will appear under the map and in the Saved Trips section.
-3. Click on a saved trip to view details, add budget, or flight info.
-4. Edit or delete trips as needed.
+
+2. Click Add to save the trip. It will appear under the map.
+
+3. Click Edit or Delete on a trip to modify or remove it.
+
+4. Search for a location using the search bar or click directly on the map to set a destination.
 
 ## Screenshots
 Skiss 1: 
@@ -75,11 +89,29 @@ Mobile:
 
 ## Technologies Used
 
+* Backend: Java 21, Spring Boot, Spring Data JPA
+
+* Database: PostgreSQL
+
+* Frontend: HTML, CSS, JavaScript, Thymeleaf (template engine)
+
+* Map: Leaflet + OpenStreetMap
+
+* Development Tools: IntelliJ IDEA, Git/GitHub
+
 
 
 
 ## Future Improvements
 
+* Move frontend to React for a fully dynamic UI
 
+* Add user authentication and individual accounts
+
+* Automatically fetch flight prices via API
+
+* Improved UX/UI design based on user feedback
+
+* Add budget tracking and statistics per trip
 
 
